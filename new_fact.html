@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Saisie de Facture</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f9;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: auto;
+      background: white;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: bold;
+      color: #444;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 14px;
+      box-sizing: border-box;
+    }
+
+    input[readonly] {
+      background: #e9ecef;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>Nouvelle Facture</h2>
+    <form>
+      <div class="form-group">
+        <label for="date">Date</label>
+        <input type="date" id="date" name="date" required>
+      </div>
+
+      <div class="form-group">
+        <label for="client">Client</label>
+        <input type="text" id="client" name="client" placeholder="Nom du client" required>
+      </div>
+
+      <div class="form-group">
+        <label for="numero">N° Facture</label>
+        <input type="text" id="numero" name="numero" placeholder="Ex: FAC-2025-001" required>
+      </div>
+
+      <div class="form-group">
+        <label for="pu">PU</label>
+        <input type="number" id="pu" name="pu" placeholder="Prix unitaire" step="0.01" required oninput="calculerMontant()">
+      </div>
+
+      <div class="form-group">
+        <label for="nombre">Nombre</label>
+        <input type="number" id="nombre" name="nombre" placeholder="Quantité" required oninput="calculerMontant()">
+      </div>
+
+      <div class="form-group">
+        <label for="montant">Montant</label>
+        <input type="number" id="montant" name="montant" readonly>
+      </div>
+
+      <button type="submit">Enregistrer</button>
+    </form>
+  </div>
+
+  <script>
+    function calculerMontant() {
+      let pu = parseFloat(document.getElementById('pu').value) || 0;
+      let nombre = parseFloat(document.getElementById('nombre').value) || 0;
+      document.getElementById('montant').value = (pu * nombre).toFixed(2);
+    }
+  </script>
+
+</body>
+</html>
